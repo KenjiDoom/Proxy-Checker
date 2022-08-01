@@ -6,10 +6,11 @@ import wget
 import os
 
 def grabproxies(url):
+    # The main work function
     file_name_start_pos = url.rfind("/") + 1
     file_name = url[file_name_start_pos:]
     
-    # Multiprocessing code
+
     r = requests.get(url, stream=True)
     if r.status_code == requests.codes.ok:
         print(Fore.GREEN + "Downloaded: " + url)
@@ -20,6 +21,7 @@ def grabproxies(url):
         print(Fore.RED + "404 Failed to download: " + url)
 
 def download_proxies():
+    # Thanks to TheSpeedX
     urls = ['https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks5.txt',
     'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks4.txt',
     'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt']
