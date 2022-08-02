@@ -1,9 +1,7 @@
 from colorama import Fore
-from time import time
 import concurrent.futures
 import requests
-import wget
-import os
+
 
 def grab_proxies(url):
     # The main work function
