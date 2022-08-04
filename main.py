@@ -1,7 +1,7 @@
 from colorama import Fore
 import concurrent.futures
 import requests
-
+import os
 
 def grab_proxies(url):
     # The main work function
@@ -24,7 +24,7 @@ def download_proxies():
     'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt']
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        results = executor.map(grab_proxies, urls) # pool map method
+        results = executor.map(grab_proxies, urls) # executor.map method
 
 def proxy_checker(filename):
     with open(filename, 'r') as IP:
@@ -42,15 +42,16 @@ def proxy_checker(filename):
 
 
 def test_proxies():
-    filename = ['/home/$USER/Desktop/Proxy-Checker/socks5.txt',
-    '/home/$USER/Desktop/Proxy-Checker/socks4.txt',
-    '/home/$USER/Desktop/Proxy-Checker/http.txt']
+    filename = []
     # Self-Note: Grab the users path for the .txt files
 
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        results = executor.map(proxy_checker, filename)
-
+    # shotcut to not creating a full for loop using the map function
+    #              # function goes,   # list goes here
+    if all(list(map(os.path.exists, filename))):
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            results = executor.map(proxy_checker, filename)
+    else:
+        download_proxies()
 
 
 test_proxies()
-#download_proxies()
