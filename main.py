@@ -40,9 +40,11 @@ def proxy_checker(filename):
 # How to know what file is being used? 
 # to save to a socks5, socks4 working file
 
-
 def test_proxies():
-    filename = []
+    direct = os.getcwd()
+    filename = [direct + '/socks5.txt',
+    direct + '/socks4.txt',
+    direct + '/http.txt']
     # Self-Note: Grab the users path for the .txt files
 
     # shotcut to not creating a full for loop using the map function
