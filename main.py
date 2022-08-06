@@ -53,7 +53,9 @@ def test_proxies():
         with concurrent.futures.ThreadPoolExecutor() as executor:
             results = executor.map(proxy_checker, filename)
     else:
+        print(Fore.RED + "Proxy files are not found. Starting Download...")
         download_proxies()
+        test_proxies()
 
 
 test_proxies()
