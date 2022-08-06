@@ -31,11 +31,19 @@ def proxy_checker(filename):
         for proxy in IP:
             try:
                 proxy = proxy.strip()
-                r = requests.get('https://httpbin.org/ip', proxies={'http': proxy, 'https':proxy}, timeout=1)
-                print(Fore.RED + proxy)
+                #print(Fore.WHITE + "Using" + filename) # This will display where the proxy is being used from
+                if filename.strip('http'): # How can I clean this up? Duplicate code
+                    r = requests.get('https://httpbin.org/ip', proxies={'http': proxy, 'https':proxy}, timeout=1)
+                    print(Fore.RED + "HTTP Proxy" + proxy)
+                elif filename.strip('socks5.txt'):
+                    r = requests.get('https://httpbin.org/ip', proxies={'http': proxy, 'https':proxy}, timeout=1)
+                    print(Fore.RED + "SOCKS5 PROXY: " + proxy)
+                elif filename.strip('socks4.txt'):
+                    r = requests.get('https://httpbin.org/ip', proxies={'http': proxy, 'https':proxy}, timeout=1)
+                    print(Fore.RED + "SOCKS4 PROXY: " + proxy)
             except requests.ConnectionError as err:
-                    print(Fore.GREEN + repr(err))
-
+                    #print(Fore.GREEN + repr(err))
+                    print(Fore.GREEN + proxy + " is not working")
 # Self-note:
 # How to know what file is being used? 
 # to save to a socks5, socks4 working file
